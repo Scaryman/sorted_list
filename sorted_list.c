@@ -31,11 +31,9 @@ void	add(t_list **list, int n)
 	new = (t_list*)malloc(sizeof(t_list));
 	new->n = n;
 	new->count = 1;
-	new->next = NULL;
 	if (!prev)
 	{
-		if (*list)
-			new->next = *list;
+		new->next = *list;
 		*list = new;
 	}
 	else
