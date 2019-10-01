@@ -33,16 +33,11 @@ void	add(t_list **list, int n)
 	new = (t_list*)malloc(sizeof(t_list));
 	new->n = n;
 	new->count = 1;
+	new->next = tmp;
 	if (!prev)
-	{
-		new->next = tmp;
 		*list = new;
-	}
 	else
-	{
-		new->next = prev->next;
 		prev->next = new;
-	}
 }
 
 void	del(t_list **list, int n)
