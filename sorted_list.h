@@ -10,5 +10,6 @@ typedef struct	s_list
 }				t_list;
 void	do_op(int operation, int n);
 void	add(t_list **list, int n);
+void	del(t_list **list, int n);
 void	print(t_list **list);
 #endif

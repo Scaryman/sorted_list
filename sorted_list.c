@@ -7,33 +7,35 @@ void	do_op(int operation, int n)
 	if (operation == 0) //add
 		add(&list, n);
 	else if (operation == 1) //del
-	{}
+		del(&list, n);
 	else if (operation == 2) //print
 		print(&list);
 }
 
 void	add(t_list **list, int n)
 {
+	t_list	*tmp;
 	t_list	*new;
 	t_list	*prev;
 
+	tmp = *list;
 	prev = NULL;
-	while (*list && (*list)->n <= n)
+	while (tmp && tmp->n <= n)
 	{
-		if ((*list)->n == n)
+		if (tmp->n == n)
 		{
-			(*list)->count++;
+			tmp->count++;
 			return;
 		}
-		prev = *list;
-		list = &(*list)->next;
+		prev = tmp;
+		tmp = tmp->next;
 	}
 	new = (t_list*)malloc(sizeof(t_list));
 	new->n = n;
 	new->count = 1;
 	if (!prev)
 	{
-		new->next = *list;
+		new->next = tmp;
 		*list = new;
 	}
 	else
@@ -41,6 +43,28 @@ void	add(t_list **list, int n)
 		new->next = prev->next;
 		prev->next = new;
 	}
+}
+
+void	del(t_list **list, int n)
+{
+	t_list	*tmp;
+	t_list	*prev;
+
+	tmp = *list;
+	if (tmp && tmp->n == n)
+	{
+		*list = tmp->next;
+		free(tmp);
+	}
+	while (tmp && tmp->n != n)
+	{
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	if (!tmp)
+		return;
+	prev->next = tmp->next;
+	free(tmp);
 }
 
 void	print(t_list **list)
